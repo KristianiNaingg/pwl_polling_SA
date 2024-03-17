@@ -17,3 +17,5 @@ frangky@gmail.com - frangky123 - Mahasiswa
 kristiani@gmail.com - kristiani123 - Mahasiswa
 
 admin@gmail.com -admin54321 - Admin
+
+prodi@gmail.com -prodi54321 - Program Studi
