@@ -14,18 +14,23 @@ use App\Http\Controllers\Auth\LoginController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', function() {
+    return redirect(route('login'));
 });
 
 Route::get('/starter', function(){
     return view('starter' );
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+Route::middleware(['auth'])->group(function () {
+    Route::get('/dashboard', [\App\Http\Controllers\MataKuliahController::class, 'index'])->name('dashboard');
+});
 
-//Route::post('/login', [LoginController::class, 'authenticate'])->name('login');
+Route::post('/login', [\App\Http\Controllers\LoginController::class, 'authenticate'])->name('login');
 
 require __DIR__.'/auth.php';
+
+Route::get('/mk', [\App\Http\Controllers\MataKuliahController::class,'index'])->name('mk-list');
+Route::get('/mk-polling', [\App\Http\Controllers\MataKuliahController::class,'polling'])->name('mk-polling');
+Route::post('/mk-store', [\App\Http\Controllers\MataKuliahController::class,'store'])->name('mk-store');
+
