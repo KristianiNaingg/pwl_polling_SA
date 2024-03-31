@@ -42,4 +42,12 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    protected $primaryKey = 'id';
+
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
+    }
+
 }
