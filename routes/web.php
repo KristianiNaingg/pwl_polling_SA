@@ -2,8 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\ProdiController;
-use App\Http\Controllers\MatkulController;
+use App\Http\Controllers\AdminController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -31,12 +31,6 @@ Route::get('/dashboard', function () {
 //Route::post('/login', [LoginController::class, 'authenticate'])->name('login');
 
 require __DIR__.'/auth.php';
-Route::get('/prodi', [ProdiController::class, 'index'])->name('prodi-list');
-Route::get('/prodi/create', [ProdiController::class, 'create'])->name('prodi-create');
-Route::post('/prodi-create', [ProdiController::class, 'store'])->name('prodi-store');
 
+Route::get('/admin', [AdminController::class, 'index'])->name('user-list');
 
-Route::get('/prodi/matkul', [MatkulController::class, 'index'])->name('matkul-list');
-
-Route::get('/prodi/matkul-create', [MatkulController::class, 'create'])->name('matkul-create');
-Route::post('/prodi/matkul-store', [MatkulController::class, 'store'])->name('matkul-store');
