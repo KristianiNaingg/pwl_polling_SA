@@ -40,3 +40,8 @@ Route::get('/prodi/matkul', [MatkulController::class, 'index'])->name('matkul-li
 
 Route::get('/prodi/matkul-create', [MatkulController::class, 'create'])->name('matkul-create');
 Route::post('/prodi/matkul-store', [MatkulController::class, 'store'])->name('matkul-store');
+
+Route::get('/mk', [\App\Http\Controllers\MataKuliahController::class,'index'])->name('mk-list');
+Route::get('/mk-polling', [\App\Http\Controllers\MataKuliahController::class,'polling'])->name('mk-polling');
+Route::post('/mk-store', [\App\Http\Controllers\MataKuliahController::class,'store'])->name('mk-store');
+
