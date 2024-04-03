@@ -8,17 +8,19 @@ use Illuminate\Database\Eloquent\Model;
 class Matakuliah extends Model
 {
     use HasFactory;
+
     protected $table = 'mata_kuliah';
-    protected $fillable =[
+
+    protected $fillable = [
         'id',
         'kode_matkul',
-        'nama_matku',
+        'nama_matkul',
         'sks',
-
+        'kurikulum_id',
     ];
 
-
-    public function kurikulum(){
-        return $this->belongsTo (Kurikulum::class,'kurikulum_id');
+    public function kurikulum()
+    {
+        return $this->belongsTo(Kurikulum::class, 'kurikulum_id', 'kurikulum_id');
     }
 }
