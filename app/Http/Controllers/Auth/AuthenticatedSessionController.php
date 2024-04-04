@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
+use App\Models\User; // Import model User
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -28,11 +29,27 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request)
     {
-        $request->authenticate();
+        $credentials = $request->only('email', 'password');
 
-        $request->session()->regenerate();
+        // Attempt to authenticate the user
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
 
-        return redirect()->intended(RouteServiceProvider::HOME);
+            // Find the user by email
+            $user = User::where('email', $request->email)->first();
+
+            // Check if the user exists and has the role 'admin'
+            if ($user && $user->role->role_name == 'admin') {
+                return redirect()->route('user-list'); // Redirect admin to admin page
+            } else {
+                return redirect()->intended(RouteServiceProvider::HOME);
+            }
+        }
+
+        // If authentication fails, redirect back with error
+        return back()->withErrors([
+            'email' => 'The provided credentials do not match our records.',
+        ]);
     }
 
     /**
