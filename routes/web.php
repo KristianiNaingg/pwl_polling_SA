@@ -27,6 +27,23 @@ Route::get('/starter', function(){
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
+Route::middleware(['auth'])->group(function () {
+    Route::get('/admin', [AdminController::class, 'index'])->name('user-list');
+    Route::get('/admin/user-create', [AdminController::class, 'create'])->name('user-create');
+    Route::post('/admin/user-store', [AdminController::class, 'store'])->name('user-store');
+    
+});
+
+Route::get('/dashboard', function () {
+    if (auth()->user()->role->role_name == 'admin') { // Memeriksa peran dengan benar
+        return redirect()->route('user-list'); // Redirect admin to admin page
+    } else {
+        return view('dashboard'); // Non-admin users stay on the dashboard
+    }
+})->middleware(['auth'])->name('dashboard');
+
+Route::post('/login', [LoginController::class, 'authenticate'])->name('login');
+require __DIR__.'/auth.php';
 
 //Route::post('/login', [LoginController::class, 'authenticate'])->name('login');
 
