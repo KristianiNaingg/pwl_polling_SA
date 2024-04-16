@@ -1,4 +1,3 @@
-
 @extends('layouts.master')
 
 @section('web-content')
@@ -8,12 +7,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0">Starter Page</h1>
+                        <h1 class="m-0">Tambah Jadwal Polling</h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Starter Page</li>
+                            <li class="breadcrumb-item active">Polling</li>
                         </ol>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
@@ -28,12 +27,9 @@
                     <div class="card-body">
                         @if($errors->any())
                             <div class="alert alert-danger">
-
                                 {{implode('',$errors-> all (':message'))}}
                             </div>
                         @endif
-
-
 
                         <form method="post" action="{{route('prodi-store')}}">
                             @csrf <!-- @crsf wajib ada di setiap form -->
@@ -41,7 +37,7 @@
                                 <div class="form-group row">
                                     <label for="id-prodi" class="col-sm-2 col-form-label">No</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" id="id-prodi" placeholder="Contoh : 1" name="id" required autofocus maxlength="16">
+                                        <input type="text" class="form-control" id="id-prodi" placeholder="Contoh : 1" name="id" required autofocus maxlength="16" value="{{ $nextId }}">
                                     </div>
                                 </div>
 
@@ -64,7 +60,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="tgl_tututp" class="col-sm-2 col-form-label">Tanggal Buka</label>
+                                    <label for="tgl_tutup" class="col-sm-2 col-form-label">Tanggal Tutup</label>
                                     <div class="col-sm-10">
                                         <div class="input-group">
                                             <input type="text" class="form-control datepicker" name="tanggaltutup" placeholder="Pilih Tanggal">
@@ -76,36 +72,32 @@
                                 </div>
 
                                 <button type="submit" class="btn btn-primary">Submit</button>
-
+                            </div><!-- /.card-body -->
                         </form>
-                    </div>
-                </div>
+                    </div><!-- /.card-body -->
+                </div><!-- /.card -->
             </div><!-- /.container-fluid -->
-        </div>
-        <!-- /.content -->
-    </div>
+        </div><!-- /.content -->
+    </div><!-- /.content-wrapper -->
 @endsection
 
 @section('ExtraCSS')
     <link rel="stylesheet" href="{{asset('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css')}}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
 @endsection
 
 @section('ExtraJS')
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
-
+    <script src="{{asset('plugins/datatables/jquery.dataTables.min.js')}}"></script>
+    <script src="{{asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
     <script>
         $(document).ready(function(){
             $('.datepicker').datepicker({
                 format: 'yyyy-mm-dd',
                 autoclose: true
             });
+            $('#table-prodi').DataTable();
         });
-    </script>
-    <script src="{{asset('plugins/datatables/jquery.dataTables.min.js')}}"></script>
-    <script src="{{asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
-    <script>
-        $('#table-prodi').DataTable();
     </script>
 @endsection
