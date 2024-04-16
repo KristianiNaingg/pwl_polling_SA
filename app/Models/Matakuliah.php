@@ -22,5 +22,12 @@ class Matakuliah extends Model
     public function kurikulum()
     {
         return $this->belongsTo(Kurikulum::class, 'kurikulum_id', 'kurikulum_id');
+
     }
+
+    public function prodi()
+    {
+        return $this->belongsToMany(Prodi::class);
+    }
+
 }
