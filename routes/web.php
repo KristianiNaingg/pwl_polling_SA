@@ -52,9 +52,11 @@ Route::get('/prodi', [ProdiController::class, 'index'])->name('prodi-list');
 Route::get('/prodi/create', [ProdiController::class, 'create'])->name('prodi-create');
 Route::post('/prodi-create', [ProdiController::class, 'store'])->name('prodi-store');
 
+Route::get('/prodi-edit/{prodi}', [ProdiController::class, 'edit'])->name('prodi-edit');
+Route::post('/prodi-edit/{prodi}', [ProdiController::class, 'update'])->name('prodi-update');
+Route::get('/prodi-delete/{prodi}', [ProdiController::class, 'destroy'])->name('prodi-delete');
 
 Route::get('/prodi/matkul', [MatkulController::class, 'index'])->name('matkul-list');
-
 Route::get('/prodi/matkul-create', [MatkulController::class, 'create'])->name('matkul-create');
 Route::post('/prodi/matkul-store', [MatkulController::class, 'store'])->name('matkul-store');
 
