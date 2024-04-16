@@ -49,13 +49,19 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($prodis as $prodi)
+                              @foreach($prodis as $prodi)
                                 <tr>
                                     <td>{{ $prodi->id }}</td>
                                     <td>{{ $prodi->nama_polling}}</td>
                                     <td>{{ $prodi->tgl_buka }}</td>
                                     <td>{{ $prodi->tgl_tutup}}</td>
-                                    <td> Detail</td>
+                                    <td><a href="{{route('matkul-list')}}">Detail</a> </td>
+                                    <td>
+                                        <a href="{{route('prodi-edit',['prodi'=> $prodi-> id])}}" class="btn btn-warning " role="button"><i class= "fas fa-edit"></i></a>
+                                        {{--                                        <a href="{{route('kk-delete',['kartuKeluarga'=> $kk-> no])}}" class="btn btn-danger " role="button"><i class= "fas fa-trash"></i></a>--}}
+                                        <a href="{{ route('prodi-delete', ['prodi' => $prodi->id]) }}" class="btn btn-danger del-button" role="button" data-confirm="Apakah kamu yakin menghapus ini?"><i class="fas fa-trash"></i></a>
+
+                                    </td>
 
                                 </tr>
                             @endforeach
