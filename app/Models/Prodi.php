@@ -17,5 +17,10 @@ class Prodi extends Model
     ];
 
 
-    protected $primaryKey = 'nik';
+    protected $primaryKey = 'id';
+
+    public function matkul()
+    {
+        return $this->belongsToMany(Matakuliah::class);
+    }
 }
