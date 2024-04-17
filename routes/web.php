@@ -20,34 +20,32 @@ Route::get('/', function () {
     return redirect(route('login'));
 });
 
-Route::get('/starter', function(){
-    return view('starter' );
-});
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
 Route::middleware(['auth'])->group(function () {
-    Route::get('/admin', [AdminController::class, 'index'])->name('user-list');
-    Route::get('/admin/user-create', [AdminController::class, 'create'])->name('user-create');
-    Route::post('/admin/user-store', [AdminController::class, 'store'])->name('user-store');
-    
-});
-
 Route::get('/dashboard', function () {
-    if (auth()->user()->role->role_name == 'admin') { // Memeriksa peran dengan benar
-        return redirect()->route('user-list'); // Redirect admin to admin page
-    } else {
-        return view('dashboard'); // Non-admin users stay on the dashboard
-    }
-})->middleware(['auth'])->name('dashboard');
+        if (auth()->user()->role->role_name == 'admin') {
+            return redirect()->route('user-list');
+        } elseif (auth()->user()->role->role_name == 'mahasiswa') {
+            return redirect()->route('mk-list');
+        } elseif (auth()->user()->role->role_name == 'prodi') {
+            return redirect()->route('prodi-list');
+        } else {
+            return view('dashboard');
+        }
+    })->name('dashboard');
+    
+Route::get('/admin', [AdminController::class, 'index'])->name('user-list');
+Route::get('/admin/user-create', [AdminController::class, 'create'])->name('user-create');
+Route::post('/admin/user-store', [AdminController::class, 'store'])->name('user-store');
+    
+Route::get('/mahasiswa/dashboard', function () {
+    return view('mahasiswa.dashboard');
+})->middleware(['mahasiswa'])->name('mahasiswa.dashboard');
 
-Route::post('/login', [LoginController::class, 'authenticate'])->name('login');
-require __DIR__.'/auth.php';
+Route::get('/prodi/dashboard', function () {
+    return view('prodi.dashboard');
+})->middleware(['prodi'])->name('prodi.dashboard');
 
-//Route::post('/login', [LoginController::class, 'authenticate'])->name('login');
-
-require __DIR__.'/auth.php';
+    
 Route::get('/prodi', [ProdiController::class, 'index'])->name('prodi-list');
 Route::get('/prodi/create', [ProdiController::class, 'create'])->name('prodi-create');
 Route::post('/prodi-create', [ProdiController::class, 'store'])->name('prodi-store');
@@ -63,4 +61,7 @@ Route::post('/prodi/matkul-store', [MatkulController::class, 'store'])->name('ma
 Route::get('/mk', [\App\Http\Controllers\MataKuliahController::class,'index'])->name('mk-list');
 Route::get('/mk-polling', [\App\Http\Controllers\MataKuliahController::class,'polling'])->name('mk-polling');
 Route::post('/mk-store', [\App\Http\Controllers\MataKuliahController::class,'store'])->name('mk-store');
-
+});
+    
+Route::post('/login', [LoginController::class, 'authenticate'])->name('login');
+require __DIR__.'/auth.php';
