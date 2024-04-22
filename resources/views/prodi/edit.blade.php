@@ -42,38 +42,38 @@
                                         </div>
                                     </div>
 
-                                <div class="form-group row">
-                                    <label for="nama-polling" class="col-sm-2 col-form-label">Nama Polling</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" class="form-control" id="nama-polling" placeholder="Contoh: Polling 1" required name="polling" maxlength="100">
+                                    <div class="form-group row">
+                                        <label for="nama-polling" class="col-sm-2 col-form-label">Nama Polling</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" id="nama-polling" placeholder="Contoh: Polling 1" required name="polling" maxlength="100">
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div class="form-group row">
-                                    <label for="tgl_buka" class="col-sm-2 col-form-label">Tanggal Buka</label>
-                                    <div class="col-sm-10">
-                                        <div class="input-group">
-                                            <input type="text" class="form-control datepicker" name="tanggalbuka" placeholder="Pilih Tanggal">
-                                            <div class="input-group-append">
-                                                <span class="input-group-text"><i class="fas fa-calendar-alt"></i></span>
+                                    <div class="form-group row">
+                                        <label for="tgl_buka" class="col-sm-2 col-form-label">Tanggal Buka</label>
+                                        <div class="col-sm-10">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control datepicker" name="tanggalbuka" placeholder="Pilih Tanggal">
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text"><i class="fas fa-calendar-alt"></i></span>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
 
-                                <div class="form-group row">
-                                    <label for="tgl_tutup" class="col-sm-2 col-form-label">Tanggal Tutup</label>
-                                    <div class="col-sm-10">
-                                        <div class="input-group">
-                                            <input type="text" class="form-control datepicker" name="tanggaltutup" placeholder="Pilih Tanggal">
-                                            <div class="input-group-append">
-                                                <span class="input-group-text"><i class="fas fa-calendar-alt"></i></span>
+                                    <div class="form-group row">
+                                        <label for="tgl_tutup" class="col-sm-2 col-form-label">Tanggal Tutup</label>
+                                        <div class="col-sm-10">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control datepicker" name="tanggaltutup" placeholder="Pilih Tanggal">
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text"><i class="fas fa-calendar-alt"></i></span>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
+                                    <button type="submit" class="btn btn-primary">Update</button>
                                 </div>
-                                <button type="submit" class="btn btn-primary">Update</button>
-                            </div>
                         </form>
                     </div>
                 </div>

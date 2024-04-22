@@ -35,7 +35,7 @@
                 <!-- Add icons to the links using the .nav-icon class
                      with font-awesome or any other icon font library -->
                 <li class="nav-item menu-open">
-                    <a href="{{ route('mk-list') }}" class="nav-link active">
+                    <a href="{{ route('prodi-mklist') }}" class="nav-link active">
                         <i class="nav-icon fas fa-pen"></i>
                         <p>
                             Mata Kuliah

@@ -55,7 +55,7 @@
                                             <label for="name">Name</label>
                                             <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" id="name" value="{{ old('name') }}" placeholder="Name" autofocus>
                                             @error('name')
-                                                <div class="text-danger small mt-1">{{ $message }}</div>
+                                            <div class="text-danger small mt-1">{{ $message }}</div>
                                             @enderror
                                         </div>
 
@@ -63,7 +63,7 @@
                                             <label for="email">Email</label>
                                             <input type="text" class="form-control @error('email') is-invalid @enderror" name="email" id="email" value="{{ old('email') }}" placeholder="Email">
                                             @error('email')
-                                                <div class="text-danger small mt-1">{{ $message }}</div>
+                                            <div class="text-danger small mt-1">{{ $message }}</div>
                                             @enderror
                                         </div>
 
@@ -71,7 +71,7 @@
                                             <label for="password">Password</label>
                                             <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" id="password" value="{{ old('password') }}" placeholder="Password">
                                             @error('password')
-                                                <div class="text-danger small mt-1">{{ $message }}</div>
+                                            <div class="text-danger small mt-1">{{ $message }}</div>
                                             @enderror
                                         </div>
 
@@ -79,7 +79,7 @@
                                             <label for="password_confirmation">Password Confirmation</label>
                                             <input type="password" class="form-control @error('password_confirmation') is-invalid @enderror" name="password_confirmation" id="password_confirmation" value="{{ old('password_confirmation') }}" placeholder="Password Confirmation">
                                             @error('password_confirmation')
-                                                <div class="text-danger small mt-1">{{ $message }}</div>
+                                            <div class="text-danger small mt-1">{{ $message }}</div>
                                             @enderror
                                         </div>
 
@@ -92,7 +92,7 @@
                                                 @endforeach
                                             </select>
                                             @error('role')
-                                                <span class="invalid-feedback" role="alert">
+                                            <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
                                                 </span>
                                             @enderror

@@ -34,7 +34,7 @@
         <!-- Main content -->
         <div class="content">
             <div class="container-fluid">
-                
+
                 <div class="row">
                     <div class="col-lg-3 col-6">
                         <!-- small box -->
@@ -92,22 +92,22 @@
                         <div class="card-body">
                             <table id="table-kk" class="table table-striped">
                                 <thead>
-                                    <tr>
-                                        <th>No</th>
-                                        <th>Nama</th>
-                                        <th>Email</th>
-                                        <th>Role</th>
-                                    </tr>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Nama</th>
+                                    <th>Email</th>
+                                    <th>Role</th>
+                                </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($users as $user)
+                                @foreach($users as $user)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $user->name }}</td>
                                         <td>{{ $user->email }}</td>
                                         <td>{{  $user->role ? $user->role->role_name : 'N/A' }}</td>
                                     </tr>
-                                    @endforeach
+                                @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -127,7 +127,7 @@
 @section('ExtraJS')
     <script src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
-    
+
     <script>
         $(document).ready(function () {
             $('#table-kk').DataTable();
