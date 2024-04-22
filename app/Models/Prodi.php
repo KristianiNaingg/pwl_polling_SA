@@ -10,14 +10,14 @@ class Prodi extends Model
     use HasFactory;
     protected $table = 'polling';
     protected $fillable = [
-        'id',
+        'id_polling',
         'nama_polling',
         'tgl_buka',
         'tgl_tutup',
     ];
 
 
-    protected $primaryKey = 'id';
+    protected $primaryKey = 'id_polling';
 
     public function matkul()
     {

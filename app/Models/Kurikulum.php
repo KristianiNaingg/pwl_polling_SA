@@ -8,20 +8,17 @@ use Illuminate\Database\Eloquent\Model;
 class Kurikulum extends Model
 {
     use HasFactory;
-
     protected $table = 'kurikulum';
 
-    protected $fillable = [
+    protected $fillable =[
         'kurikulum_id',
         'tahun_akademik',
         'semester',
         'aktif',
+
     ];
-
-    protected $primaryKey = 'kurikulum_id';
-
-    public function matakuliah()
-    {
-        return $this->hasMany(Matakuliah::class, 'kurikulum_id', 'kurikulum_id');
+    protected $primaryKey='kurikulum_id';
+    public function matakuliah(){
+        return $this-> hasMany(Matakuliah::class) ;
     }
 }

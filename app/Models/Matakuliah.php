@@ -12,16 +12,17 @@ class Matakuliah extends Model
     protected $table = 'mata_kuliah';
 
     protected $fillable = [
-        'id',
+        'id_matkul',
         'kode_matkul',
         'nama_matkul',
         'sks',
         'kurikulum_id',
     ];
+    protected $primaryKey='id_matkul';
 
     public function kurikulum()
     {
-        return $this->belongsTo(Kurikulum::class, 'kurikulum_id', 'kurikulum_id');
+        return $this->belongsTo(Kurikulum::class, 'kurikulum_id');
 
     }
 
