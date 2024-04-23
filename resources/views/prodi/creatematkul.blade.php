@@ -38,18 +38,12 @@
                         <form method="post" action="{{ route('prodi-mkstore') }}">
                             @csrf <!-- @csrf wajib ada di setiap form -->
                             <div class="card-body">
-                                {{--                                <div class="form-group row">--}}
-                                {{--                                    <label for="id-matkul" class="col-sm-2 col-form-label">Nomor</label>--}}
-                                {{--                                    <div class="col-sm-10">--}}
-                                {{--                                        <input type="text" class="form-control" id="code-matkul" placeholder="Contoh: Polling 1" required name="id" maxlength="16">--}}
-                                {{--                                    </div>--}}
-                                {{--                                </div>--}}
 
                                 <div class="form-group row">
                                     <label for="id-matkul" class="col-sm-2 col-form-label">Nomor</label>
                                     <div class="col-sm-10">
                                         <!-- Tampilkan id berikutnya yang sudah dihitung di controller -->
-                                        <input type="text" class="form-control" id="code-matkul" placeholder="Contoh: Polling 1" required name="id" maxlength="16">
+                                        <input type="text" class="form-control" id="code-matkul" placeholder="Contoh: Polling 1" required name="id_matkul" maxlength="16" value="{{ $nextId }}">
                                     </div>
                                 </div>
 
@@ -86,6 +80,7 @@
                                     <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
+
 
                                 <button type="submit" class="btn btn-primary">Submit</button>
                             </div>
