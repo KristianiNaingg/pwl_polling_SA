@@ -31,14 +31,14 @@
                             </div>
                         @endif
 
-                        <form method="post" action="{{ route('prodi-update', ['prodi' => $prodi->id]) }}">
+                        <form method="post" action="{{ route('prodi-mkupdate', ['matkul' => $matkul->id_matkul]) }}">
                             @csrf
                             <div class="card-body">
                                 <div class="card-body">
                                     <div class="form-group row">
                                         <label for="id-prodi" class="col-sm-2 col-form-label">No</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="id-prodi" placeholder="Contoh : 1" name="id" required autofocus maxlength="16" ">
+                                            <input type="text" class="form-control" id="id-prodi" placeholder="Contoh : 1" name="id" required autofocus maxlength="16" >
                                         </div>
                                     </div>
 
