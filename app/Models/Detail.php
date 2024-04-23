@@ -9,22 +9,17 @@ class Detail extends Model
 {
   
     use HasFactory;
-    protected $table = 'polling_detail';
+    protected $table = 'polling_detail'; //Sesuaikan nama tabel jika diperlukan
+    protected $primaryKey = 'detail_id'; // Tentukan primary key yang benar
 
-    protected $fillable =[
-        'id_detail',
-        'status_pemilihan',
-       
+    protected $fillable = ['id_polling', 'id_matkul','status_pemilihan',
+];
 
-    ];
-    protected $primaryKey='id_detail';
-
-    public function matakuliah(){
-        return $this->belongsTo(Matakuliah::class, 'id_matkul', );
-    }
-
-    public function prodi(){
-        return $this->belongsTo(Prodi::class, 'id_polling', );
+    
+    public function mahasiswa()
+    {
+        return $this->belongsTo(User::class, 'users_id','id' );
+        // ^ Specify the foreign key column name in the 'polling_detail' table
     }
     
 }

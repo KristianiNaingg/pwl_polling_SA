@@ -28,7 +28,9 @@ class Matakuliah extends Model
 
     public function prodi()
     {
-        return $this->belongsToMany(Prodi::class);
+    
+        return $this->belongsToMany(Prodi::class, 'id_detail', 'id_matkul', 'id_polling');
     }
+    
 
 }

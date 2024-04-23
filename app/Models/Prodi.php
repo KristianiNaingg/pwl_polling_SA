@@ -19,8 +19,10 @@ class Prodi extends Model
 
     protected $primaryKey = 'id_polling';
 
-    public function matkul()
+    public function matkuls()
     {
-        return $this->belongsToMany(Matakuliah::class);
+        return $this->belongsToMany(Matakuliah::class, 'polling_detail');
     }
+
+
 }
