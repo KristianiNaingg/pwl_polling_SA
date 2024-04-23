@@ -1,7 +1,7 @@
-Anggota Kelompok:
-2172036 - Frangky Hernandez - username github:(frangkyyy)
-2172017 - Theresia Putri Nadia - username github:(2172017)
-2172044 - Kristiani Nainggolan - username github:(KristianiNaingg)
+Anggota Kelompok:<br>
+2172036 - Frangky Hernandez - username github:(frangkyyy)<br>
+2172017 - Theresia Putri Nadia - username github:(2172017)<br>
+2172044 - Kristiani Nainggolan - username github:(KristianiNaingg)<br>
 
 Info file .env
 
