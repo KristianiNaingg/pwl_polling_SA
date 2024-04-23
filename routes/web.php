@@ -49,7 +49,14 @@ Route::get('/prodi/dashboard', function () {
 Route::get('/prodi', [ProdiController::class, 'index'])->name('prodi-list');
 Route::get('/prodi/create', [ProdiController::class, 'create'])->name('prodi-create');
 Route::post('/prodi-create', [ProdiController::class, 'store'])->name('prodi-store');
+    
+Route::get('/prodi', [\App\Http\Controllers\ProdiController::class, 'index'])->name('prodi-mklist');
+Route::get('/prodi/matkul-create', [\App\Http\Controllers\ProdiController::class, 'create'])->name('prodi-mkcreate');
+Route::post('/prodi/matkul-store', [\App\Http\Controllers\ProdiController::class, 'store'])->name('prodi-mkstore');
 
+Route::get('/prodi-edit', [\App\Http\Controllers\ProdiController::class, 'edit'])->name('prodi-mkedit');
+Route::post('/prodi-edit', [\App\Http\Controllers\ProdiController::class, 'update'])->name('prodi-mkupdate');
+Route::get('/prodi-delete', [\App\Http\Controllers\ProdiController::class, 'destroy'])->name('prodi-mkdelete');
 Route::get('/prodi-edit/{prodi}', [ProdiController::class, 'edit'])->name('prodi-edit');
 Route::post('/prodi-edit/{prodi}', [ProdiController::class, 'update'])->name('prodi-update');
 Route::get('/prodi-delete/{prodi}', [ProdiController::class, 'destroy'])->name('prodi-delete');
