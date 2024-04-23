@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Prodi;
+use App\Models\MataKuliah;
 use Illuminate\Http\Request;
 
 class ProdiController extends Controller
@@ -14,9 +15,10 @@ class ProdiController extends Controller
      */
     public function index()
     {
-        return view('prodi.index', [
-            'prodis' => Prodi::all(),
-        ]);
+        $matkuls = MataKuliah::all(); // Mengambil semua data Mata Kuliah
+        $prodis = Prodi::all(); // Mengambil semua data Program Studi
+
+        return view('prodi.index', compact('matkuls', 'prodis'));
     }
 
     public function create()
