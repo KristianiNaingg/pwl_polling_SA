@@ -1,3 +1,8 @@
+Anggota Kelompok:
+2172036 - Frangky Hernandez - username github:(frangkyyy)
+2172017 - Theresia Putri Nadia - username github:(2172017)
+2172044 - Kristiani Nainggolan - username github:(KristianiNaingg)
+
 Info file .env
 
 DB_DATABASE=database_uts
