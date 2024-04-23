@@ -69,5 +69,14 @@ Route::get('/mk-polling', [\App\Http\Controllers\MataKuliahController::class,'po
 Route::post('/mk-store', [\App\Http\Controllers\MataKuliahController::class,'store'])->name('mk-store');
 });
 
+
+Route::get('/prodi-edit', [\App\Http\Controllers\ProdiController::class, 'edit'])->name('prodi-mkedit');
+Route::post('/prodi-edit', [\App\Http\Controllers\ProdiController::class, 'update'])->name('prodi-mkupdate');
+Route::get('/prodi-delete', [\App\Http\Controllers\ProdiController::class, 'destroy'])->name('prodi-mkdelete');
+
+Route::get('/prodi/polling', [\App\Http\Controllers\ProdiController::class, 'polling'])->name('prodi-pollinglist');
+Route::get('/prodi/polling-create', [\App\Http\Controllers\ProdiController::class, 'createpolling'])->name('prodi-pollingcreate');
+Route::post('/prodi/polling-store', [\App\Http\Controllers\ProdiController::class, 'storepolling'])->name('prodi-pollingstore');
+
 Route::post('/login', [LoginController::class, 'authenticate'])->name('login');
 require __DIR__.'/auth.php';
