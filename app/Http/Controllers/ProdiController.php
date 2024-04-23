@@ -1,126 +1,166 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\Matakuliah;
+use App\Models\Kurikulum;
 
 use App\Models\Prodi;
-use App\Models\MataKuliah;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class ProdiController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
+
     public function index()
     {
-        $matkuls = MataKuliah::all(); // Mengambil semua data Mata Kuliah
-        $prodis = Prodi::all(); // Mengambil semua data Program Studi
-
-        return view('prodi.index', compact('matkuls', 'prodis'));
+        $matkuls = Matakuliah::with('kurikulum')->get();
+        $pollings = Prodi::all(); // Definisikan variabel $pollings
+        return view('prodi.index', compact('matkuls', 'pollings')); // Mengirimkan data $matkuls dan $pollings ke view
     }
+
+
 
     public function create()
-        #menampilkan formnya saja
+
     {
-        $lastId = Prodi::max('id');
+        $lastId = Matakuliah::max('id_matkul');
         // Menambah 1 untuk mendapatkan id berikutnya
         $nextId = $lastId + 1;
-        return view('prodi.create',(compact('nextId')));
-
+        $kurikulums = Kurikulum::all();
+        $matkuls = Matakuliah::all();
+//        $pollings = Prodi::all();
+        return view('prodi.creatematkul', compact('kurikulums','matkuls','nextId'));
     }
 
+    public function polling()
+    {
+        return view('prodi.index',[
+            'pollings'=>Prodi::all(),
+        ]);
+    }
+    public function createpolling(){
+        $pollings = Prodi::all();
+        return view('prodi.index', compact('pollings'));
+    }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
+//    public function getPollingDetails($id)
+//    {
+//        $polling = Prodi::findOrFail($id);
+//        return response()->json($polling);
+//    }
+//
+
+
+    public function storepolling(Request $request)
+
+    {
+
+//        return view('prodi.index',[
+//            'prodis' => Prodi::all(),
+//        ]);
+        $validatedData = $request->validate([
+            'id_polling' => 'required|integer|max:11',
+            'nama_polling' => 'required|max:100',
+            'tgl_buka' => 'required|date',
+            'tgl_tutup ' => 'required|date',
+        ]);
+        // Simpan data Prodi ke dalam database
+        $prodi = new Prodi();
+        $prodi->id_polling = $validatedData['id_polling'];
+        $prodi->nama_polling = $validatedData['nama_polling']; // Pastikan 'nama_polling' diisi dengan nilai yang valid
+        $prodi->tgl_buka = $validatedData['tgl_buka'];
+        $prodi->tgl_tutup = $validatedData['tgl_tutup'];
+        $prodi->save();
+
+        // Redirect ke halaman lain atau kembali ke halaman sebelumnya
+        return redirect()->route('prodi-mklist')->with('success','sukses full');
+
+
+    }
 
 
     public function store(Request $request)
     {
-
-        $validatedData = $request->validate([
-            'id' => 'required|string|max:16|unique:polling',
-            'polling' => 'required|max:100',
-            'tanggalbuka' => 'required|date',
-            'tanggaltutup' => 'required|date',
+        $validator = Validator::make($request->all(), [
+            'id_matkul' => 'required|string|max:16|unique:mata_kuliah',
+            'kode_matkul' => 'required|max:100',
+            'nama_matkul' => 'required|max:100',
+            'sks' => 'required|max:100',
+            'kurikulum_id' => 'required|string|max:16',
         ]);
 
-        // Simpan data Prodi ke dalam database
-        $prodi = new Prodi();
-        $prodi->id = $validatedData['id'];
-        $prodi->nama_polling = $validatedData['polling']; // Pastikan 'nama_polling' diisi dengan nilai yang valid
-        $prodi->tgl_buka = $validatedData['tanggalbuka'];
-        $prodi->tgl_tutup = $validatedData['tanggaltutup'];
-        $prodi->save();
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
 
-        // Redirect ke halaman lain atau kembali ke halaman sebelumnya
-        return redirect(route('prodi-list'));
-    }
+        Matakuliah::create([
+            'id_matkul' => $request->id_matkul,
+            'nama_matkul' => $request->nama_matkul,
+            'kode_matkul' => $request->kode_matkul,
+            'kurikulum_id' => $request->kurikulum_id,
+            'sks' => $request->sks,
 
-
-    public function show(Prodi $prodi)
-    {
-        //
-    }
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Prodi $prodi
-     * @return \Illuminate\Http\Response
-     */
-
-    public function edit(Prodi $prodi)
-    {
-        return view('prodi.edit', [
-            'prodi' => $prodi,
         ]);
-    }
 
+        session()->flash('success', 'Data Matakuliah Berhasil Ditambahkan');
+
+        return redirect()->route('prodi-mklist');
+    }
+    public function edit(Matakuliah $matkul)
+    {
+
+        $kurikulums = Kurikulum::all();
+        return view('prodi.editmatkul', compact('matkul',  'kurikulums'));
+    }
     /**
      * Update the specified resource in storage.
      *
      * @param \Illuminate\Http\Request $request
-     * @param \App\Models\Prodi $prodi
+     * @param \App\Models\Matakuliah $matkul
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Prodi $prodi)
+    public function update(Request $request, Matakuliah $matkul)
     {
         $validatedData = $request->validate([
-            'id' => 'required|string|max:16|unique:polling',
-            'polling' => 'required|max:100',
-            'tanggalbuka' => 'required|date',
-            'tanggaltutup' => 'required|date',
-         // Mengganti 'polling' menjadi 'nama_polling' sesuai dengan nama kolom dalam tabel
-        ], [
-            'id.required' => ' Id Wajib diisi',
-            'polling.required' => 'Polling wajib diisi',
-            'tanggalbuka.required' => 'Tanggal  Buka wajib diisi',
-            'tanggaltutup.required' => 'Tanggal Tutup  wajib diisi',
+            'id_matkul' => 'required|string|max:16|unique:mata_kuliah',
+            'kode_matkul' => 'required|max:100',
+            'nama_matkul' => 'required|max:100',
+            'sks' => 'required|max:100',
+            'kurikulum_id' => 'required|string|max:16',
         ]);
 
-        $prodi->id = $validatedData['id'];
-        $prodi->nama_polling = $validatedData['polling']; // Pastikan 'nama_polling' diisi dengan nilai yang valid
-        $prodi->tgl_buka = $validatedData['tanggalbuka'];
-        $prodi->tgl_tutup = $validatedData['tanggaltutup'];
-        $prodi->save();
+        $matkul->update([
+            'id_matkul'=>  $validatedData->id_matkul,
+            'nama_matkul' =>  $validatedData->nama_matkul,
+            'kode_matkul' =>  $validatedData->kode_matkul,
+            'kurikulum_id' =>  $validatedData->kurikulum_id,
+            'sks' =>  $validatedData->sks,
+        ]);
 
-        return redirect(route('prodi-list'));
+        return redirect(route('prodi-mklist'));
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param \App\Models\Prodi $prodi
+     * @param \App\Models\Matakuliah $matkul
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Prodi $prodi)
+    public function destroy(Matakuliah $matkul)
     {
-        $prodi->delete();
-        return redirect(route('prodi-list'));
+        $matkul->delete();
+        return redirect(route('prodi-mklist'));
     }
+
+    public function prodi()
+    {
+        return view('prodi.index',[
+        'prodis' => Prodi::all(),
+            ]);
+
+
+    }
+
+
 }
